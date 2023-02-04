@@ -1,0 +1,26 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class NetflixLogin {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "/caminho/para/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.netflix.com/br/");
+        
+        // clicar no botão de login
+        driver.findElement(By.xpath("//a[@href='/login']")).click();
+        
+        // inserir e-mail
+        driver.findElement(By.id("id_userLoginId")).sendKeys("seu_email@exemplo.com");
+        
+        // inserir senha
+        driver.findElement(By.id("id_password")).sendKeys("sua_senha");
+        
+        // clicar no botão de login
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        
+        // fechar navegador
+        //driver.quit();
+    }
+}
