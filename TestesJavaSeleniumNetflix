@@ -1,0 +1,50 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class NetflixLogin{
+    private WebDriver driver;
+    private WebDriverWait wait;
+    
+    public void setup() {
+        System.setProperty("webdriver.chrome.driver", "/caminho/para/chromedriver");
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 10);
+    }
+    
+    public void loginWithSuccess(String email, String password) {
+        driver.get("https://www.netflix.com/br/login");
+        
+        driver.findElement(By.id("id_userLoginId")).sendKeys(email);
+        driver.findElement(By.id("id_password")).sendKeys(password);
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'Bem-vindo de volta')]")));
+    }
+    
+    public void loginWithInvalidEmail(String email, String password) {
+        driver.get("https://www.netflix.com/br/login");
+        
+        driver.findElement(By.id("id_userLoginId")).sendKeys(email);
+        driver.findElement(By.id("id_password")).sendKeys(password);
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), 'E-mail ou senha incorretos')]")));
+    }
+    
+    public void loginWithInvalidPassword(String email, String password) {
+        driver.get("https://www.netflix.com/br/login");
+        
+        driver.findElement(By.id("id_userLoginId")).sendKeys(email);
+        driver.findElement(By.id("id_password")).sendKeys(password);
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), 'E-mail ou senha incorretos')]")));
+    }
+    
+    public void close() {
+        driver.quit();
+    }
+}
