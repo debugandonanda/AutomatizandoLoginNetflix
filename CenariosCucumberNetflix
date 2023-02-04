@@ -1,0 +1,23 @@
+Feature: Login na Netflix
+  Como um usuário da Netflix
+  Eu quero logar na minha conta
+  Para ter acesso aos meus programas favoritos
+
+  Scenario: Login com sucesso
+    Given que eu estou na página de login da Netflix
+    When eu insiro meu endereço de e-mail e minha senha
+    And clico no botão de login
+    Then eu sou redirecionado para a página inicial da Netflix
+    And vejo a mensagem de bem-vindo com meu nome de usuário
+
+  Scenario: Login com endereço de e-mail inválido
+    Given que eu estou na página de login da Netflix
+    When eu insiro um endereço de e-mail inválido e minha senha
+    And clico no botão de login
+    Then vejo uma mensagem de erro informando que o endereço de e-mail está incorreto
+
+  Scenario: Login com senha inválida
+    Given que eu estou na página de login da Netflix
+    When eu insiro meu endereço de e-mail e uma senha inválida
+    And clico no botão de login
+    Then vejo uma mensagem de erro informando que a senha está incorreta
